@@ -10,7 +10,7 @@ usage = """
 
         read_id_(cell barcode)_(UMI)
 
-    and introduces the XC:Z:(cell barcode) and XM:Z:(UMI) tags instead resoring the original read_id.
+    and introduces the XC:Z:(cell barcode) and XM:Z:(UMI) tags instead restoring the original read_id.
 
     Typical usage:
     
