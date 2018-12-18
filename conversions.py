@@ -49,7 +49,7 @@ import sys
 import re
 import pysam
 from argparse import *
-from sequence_data import rev_comp
+from Rfunctions import reverse_complement
 
 parser=ArgumentParser(description=usage, formatter_class=RawDescriptionHelpFormatter)
 parser.add_argument('inbam', default='', type=str, action='store', help='input BAM file')
@@ -109,7 +109,7 @@ for read in fin.fetch(until_eof=True):
     strand=(read.flag & 0x16)  #  0 for plus, 16 for minus
     seq=read.seq  #  use full read sequence (no clippling) because supplementary aligments might not clip
     qual=read.qual  #  nucleotide quality scores to report in filtered RNA T:C reads
-    seq_rc=rev_comp(seq)
+    seq_rc=reverse_complement(seq)
    
   #  after having updated the new rid, check if the primary or secondary alignment has insertion or is of a weird FLAG and ignore
   if (read.flag not in (0,16,256,272)) or ('I' in read.cigarstring):
@@ -130,11 +130,11 @@ for read in fin.fetch(until_eof=True):
       mm=list(mm)
       for i in mm:  #  process consecutive nucleotide mismatches one at a time
         if read.flag in (16, 272):  #  current alignment on - strand
-          i=rev_comp(i)  #  RNA edit is the reverse-complement of the reported
+          i=reverse_complement(i)  #  RNA edit is the reverse-complement of the reported
           if strand==0:  #  primary alignment on + strand
-            s=rev_comp(seq_rc[pos])  #  RNA nucleotide is the reverse-comlement of the primary reverse-complement SEQ nucleotide
+            s=reverse_complement(seq_rc[pos])  #  RNA nucleotide is the reverse-comlement of the primary reverse-complement SEQ nucleotide
           else:  #  primary alignment on - strand
-            s=rev_comp(seq[pos])  #  RNA nucleotide is the reverse-comlement of the primary SEQ nucleotide
+            s=reverse_complement(seq[pos])  #  RNA nucleotide is the reverse-comlement of the primary SEQ nucleotide
         else:  #  current alignment on + strand
           if strand==0:  #  primary alignment on + strand
             s=seq[pos]  #  RNA nucleotide is the primary SEQ nucleotide
@@ -160,7 +160,7 @@ for read in fin.fetch(until_eof=True):
       for i in d:  #  process consecutive nucleotide deletions one at a time
         gpos+=1  #  advance one the genome position over the deleted nucleotide
         if read.flag in (16,272):
-          i=rev_comp(i)  #  RNA deletion is the reverse-complement of the reported deletion
+          i=reverse_complement(i)  #  RNA deletion is the reverse-complement of the reported deletion
         k=':'.join([i,'*'])
         
         if read.flag in (0,16):
