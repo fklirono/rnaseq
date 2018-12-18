@@ -19,11 +19,11 @@ def tail(x, n=10):
 
 
 
+#  N.B. empty elements, including empty strings ('') are dropped by extend()
 def unlist(l):
     tmp=list()
     _=[tmp.extend(s) for s in l]
     return tmp
-
 
 
 def which(lst, what):
