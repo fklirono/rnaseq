@@ -28,7 +28,7 @@ my_plotSpliceDGE<-function(DS, GENEID, GENECOL, FDR=0.05, CND){
 
 
     #  identify if the exons of interest are found individually differentially spliced as well
-    #  get the log2-fold-changes of each exon against the average
+    #  get the log2-fold-changes of each exon against the average across all exons and conditions
     ex<-ex.ds[ ex, on='exon_id' ]  #  this will work even if ex.ds is empty
     ex$logFC<-DS$coefficients[ DS$genes[, GENECOL] %in% GENEID ]
     ex<-ex[ order(start) ]
