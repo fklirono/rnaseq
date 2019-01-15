@@ -8,7 +8,7 @@
 
 
 grouplist2boxplot<-function(L, L.COL, YLAB='', XLAB.COL='black', YTEXT.LINE=3, ...){
-    #  function that takes a named L of different groups that each contain the same number of rows for specific members, i.e. genes
+    #  function that takes a named list L of different groups that each contain the same number of rows for specific members, i.e. genes,
     #  but not necessarily the same number of column entires across the different groups, i.e. number of samples per group can vary, 
     #  and creates a boxplot where member distributions across groups are next to each other. 
     #
@@ -19,7 +19,7 @@ grouplist2boxplot<-function(L, L.COL, YLAB='', XLAB.COL='black', YTEXT.LINE=3, .
     #      ST4S, LR, IMR, HR_nMNA, MNA   ST4S, LR, IMR, HR_nMNA, MNA               
     #               gene A                        geneB
     #
-       #          L : named list of different groups with data.frame elements with rows the members and columns the samples
+    #             L : named list of different groups with data.frame elements with rows the members and columns the samples
     #  GROUP.COLORS : colors to use for the boxplots for the different groups
     #      XLAB.COL : color vector for the x-axis labels
     #    YTEXT.LINE : mtext(..., side=2, line=YTEXT.LINE, ..) 
