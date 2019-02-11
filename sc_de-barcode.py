@@ -24,7 +24,7 @@ usage = """
 
     Typical run:
 
-      zcat mate2.fastq.gz | %(prog)s --barcodes bc1.fa bc2.fa bc3.fa --pairs ,bc2_equivalent.fa --lengths 10 8 30 8 30 8 --with-mismatch --discard-uncalled > read_ids.tsv 2> log.txt
+      zcat mate2.fastq.gz | %(prog)s --barcodes bc1.fa,bc2.fa,bc3.fa --pairs ,,bc3_equivalent.fa --lengths 10,8,30,8,30,8 --with-mismatch --discard-uncalled > read_ids.tsv 2> log.txt
 """
 ###################################################################################################
 
@@ -82,10 +82,6 @@ if options.pairs != '':
 
 #  convert lengths to integers and compute the cumulative sum that will indicate the breakpoint positions
 POS = cumsum(map(int, options.lengths.split(','))).tolist()
-
-
-#import ipdb;  ipdb.set_trace()
-#from IPython.core.debugger import Pdb; ipdb = Pdb(); ipdb.set_trace()
 
 
 ntotal = 0
